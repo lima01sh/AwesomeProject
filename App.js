@@ -9,26 +9,48 @@
  import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
  
  const FlexDirectionBasics = () => {
-   const [flexDirection, setflexDirection] = useState("column");
  
    return (
-     <PreviewLayout
-       label="flexDirection"
-       values={["column", "row", "row-reverse", "column-reverse"]}
-       selectedValue={flexDirection}
-       setSelectedValue={setflexDirection}
-     >
-       <View
-         style={[styles.box, { backgroundColor: "powderblue" }]}
-       />
-       <View
-         style={[styles.box, { backgroundColor: "skyblue" }]}
-       />
-       <View
-         style={[styles.box, { backgroundColor: "steelblue" }]}
-       />
-     </PreviewLayout>
+    <View style={{ flex:1, flexDirection: "column" }}>
+      <View style={{ flex:1, flexDirection: "row" }}>
+        <View style={{flex:1, backgroundColor: "red", flexDirection:"row",justifyContent:"flex-start"}}>
+          <View style={{width: 50, height:50, backgroundColor: "black" }}></View>
+        </View>
+        <View style={{flex:1, backgroundColor: "green", flexDirection:"row" ,justifyContent:"flex-end"}}>
+          <View style={{width: 50, height:50, backgroundColor: "black"}}></View>
+        </View>
+      </View>
+
+      <View style={{ flex:1, flexDirection: "row" }}>
+        <View style={{flex:1, backgroundColor: "purple", flexDirection:"column-reverse",justifyContent:"flex-start"}}>
+          <View style={{width: 50, height:50, backgroundColor: "black"}}></View>
+        </View>
+        <View style={{flex:1, backgroundColor: "blue", flexDirection:"column-reverse",justifyContent:"flex-start"}}>
+          <View style={{ backgroundColor: "blue", flexDirection:"row",justifyContent:"flex-end"}}>
+            <View style={{width: 50, height:50, backgroundColor: "black"}}></View>
+          </View>
+        </View>
+      </View>
+    </View>
    );
+    
+    //  <PreviewLayout
+    //    label="flexDirection"
+    //    values={["column", "row", "row-reverse", "column-reverse"]}
+    //    selectedValue={flexDirection}
+    //    setSelectedValue={setflexDirection}
+    //  >
+    //    <View
+    //      style={[styles.box, { backgroundColor: "powderblue" }]}
+    //    />
+    //    <View
+    //      style={[styles.box, { backgroundColor: "skyblue" }]}
+    //    />
+    //    <View
+    //      style={[styles.box, { backgroundColor: "steelblue" }]}
+    //    />
+    //  </PreviewLayout>
+
  };
  
  const PreviewLayout = ({
