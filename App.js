@@ -81,18 +81,6 @@ import firestore from '@react-native-firebase/firestore';
             source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
             style= {{ width:200,height:200}}
             />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
         </ScrollView>
 
 
