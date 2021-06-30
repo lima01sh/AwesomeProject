@@ -5,88 +5,110 @@
  * @format
  * @flow strict-local
  */
-
- import React from 'react';
- import type {Node} from 'react';
-
- import {SafeAreaView, Text, TextInput, View,ScrollView
-        } from 'react-native';
- import { Input, Button , Image} from 'react-native-elements';
- import Icon from 'react-native-vector-icons/FontAwesome';
+ import React, { useState } from "react";
+ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
  
-import firestore from '@react-native-firebase/firestore';
-
-
-
- //สร้าง component
- const App: () => Node = () => {
-
-  firestore().collection('Users').doc('ABC').get().then((user) =>{
-    console.log(user)
-  });
-
-
+ const FlexDirectionBasics = () => {
+   const [flexDirection, setflexDirection] = useState("column");
+ 
    return (
-     <SafeAreaView>
-      
-       <View>
-          <Text style={{ fontSize:20 , textAlign:'center'}}>
-            Lima Shriphakdee
-            </Text>
-
-          <Input placeholder = 'Hint'/>
-
-          <TextInput 
-            style = {{backgroundColor : '#DDDDDD'}}
-            keyboardType = 'phone-pad'
-            ></TextInput>
-
-          <Button
-            title="Outline button"
-            type="outline"
-          />
-
-          <Button
-            icon={
-            <Icon
-            name="arrow-right"
-            size={30}
-            color="white"
-            />}
-
-            iconRight
-            title="Button with icon component"
-          />
-        </View>
-
-
-        <ScrollView>
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-            <Image 
-            source={{ uri: 'https://www.onlygfx.com/wp-content/uploads/2018/09/4-clipart-sun-1.png'}}
-            style= {{ width:200,height:200}}
-            />
-        </ScrollView>
-
-
-     </SafeAreaView>
-     
+     <PreviewLayout
+       label="flexDirection"
+       values={["column", "row", "row-reverse", "column-reverse"]}
+       selectedValue={flexDirection}
+       setSelectedValue={setflexDirection}
+     >
+       <View
+         style={[styles.box, { backgroundColor: "powderblue" }]}
+       />
+       <View
+         style={[styles.box, { backgroundColor: "skyblue" }]}
+       />
+       <View
+         style={[styles.box, { backgroundColor: "steelblue" }]}
+       />
+     </PreviewLayout>
    );
  };
  
- export default App;
+ const PreviewLayout = ({
+   label,
+   children,
+   values,
+   selectedValue,
+   setSelectedValue,
+ }) => (
+   <View style={{ padding: 10, flex: 1 }}>
+     <Text style={styles.label}>{label}</Text>
+     <View style={styles.row}>
+       {values.map((value) => (
+         <TouchableOpacity
+           key={value}
+           onPress={() => setSelectedValue(value)}
+           style={[
+             styles.button,
+             selectedValue === value && styles.selected,
+           ]}
+         >
+           <Text
+             style={[
+               styles.buttonLabel,
+               selectedValue === value && styles.selectedLabel,
+             ]}
+           >
+             {value}
+           </Text>
+         </TouchableOpacity>
+       ))}
+     </View>
+     <View style={[styles.container, { [label]: selectedValue }]}>
+       {children}
+     </View>
+   </View>
+ );
+ 
+ const styles = StyleSheet.create({
+   container: {
+     flex: 1,
+     marginTop: 8,
+     backgroundColor: "aliceblue",
+   },
+   box: {
+     width: 50,
+     height: 50,
+   },
+   row: {
+     flexDirection: "row",
+     flexWrap: "wrap",
+   },
+   button: {
+     paddingHorizontal: 8,
+     paddingVertical: 6,
+     borderRadius: 4,
+     backgroundColor: "oldlace",
+     alignSelf: "flex-start",
+     marginHorizontal: "1%",
+     marginBottom: 6,
+     minWidth: "48%",
+     textAlign: "center",
+   },
+   selected: {
+     backgroundColor: "coral",
+     borderWidth: 0,
+   },
+   buttonLabel: {
+     fontSize: 12,
+     fontWeight: "500",
+     color: "coral",
+   },
+   selectedLabel: {
+     color: "white",
+   },
+   label: {
+     textAlign: "center",
+     marginBottom: 10,
+     fontSize: 24,
+   },
+ });
+ 
+ export default FlexDirectionBasics;
